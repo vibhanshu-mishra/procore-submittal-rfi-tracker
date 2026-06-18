@@ -121,21 +121,20 @@ Procore action emails may land in different places depending on your Outlook set
 
 ## Important Notes
 
-**Procore email format dependency.** This flow is built around the specific email format that Procore uses for "Action Required" notifications as of mid-2025. If Procore changes its email format, expressions in the flow may need to be updated.
+**Procore email format dependency.** This flow is built around the specific email format that Procore uses for "Action Required" notifications. If Procore changes its email format, expressions in the flow may need to be updated.
 
 **Outlook folder monitoring.** Power Automate can only monitor one Outlook folder per trigger. If your Outlook routes Procore emails into multiple project-specific folders using rules, you will need either a separate flow per folder or a consolidated folder that all Procore emails pass through. This is a known limitation of the current setup.
 
-**Duplicate detection.** The flow checks for duplicates before adding a row. For submittals, it checks Submittal Name plus Project Name. For RFIs, it checks RFI Number plus Project Name. If the same notification arrives twice (which can happen when multiple team members are copied), it will not create a duplicate row.
+**Duplicate detection.** The flow checks for duplicates before adding a row. For submittals, it checks the Submittal Name plus the Project Name. For RFIs, it checks the RFI Number plus the Project Name. If the same notification arrives twice (which can happen when multiple team members are copied), it will not create a duplicate row.
 
-**This is a reference implementation.** The flow was built and validated against one specific firm's Procore and Outlook setup. Variable names, folder paths, and email parsing expressions may need adjustment for your environment.
+**This is a reference implementation.** The flow was built and validated against my firm's Procore and Outlook setup. Variable names, folder paths, and email parsing expressions may need adjustment for your environment.
 
 ---
 
 ## Roadmap
 
 - [x] Phase 1 -- Extract submittal and RFI data from Procore emails and log to Excel
-- [ ] Phase 2 -- Download submittal and RFI PDFs from Procore and save to network drive
-- [ ] Multi-folder Outlook monitoring (currently limited to one folder per trigger)
+- [ ] Phase 2 -- Download submittal and RFI PDFs from Procore emails and save to network drive
 
 ---
 
@@ -143,7 +142,7 @@ Procore action emails may land in different places depending on your Outlook set
 
 Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engineers, Austin TX.
 
-Specializing in miscellaneous steel and industrial structures. Building automation tools for structural engineering workflows that nobody else is covering.
+Specializing in steel and industrial structures. Building automation tools for structural engineering workflows that nobody else is covering.
 
 - [RISA-3D MCP Server](https://github.com/vibhanshu72/risa3d-mcp-server) -- Connect Claude AI to your RISA-3D structural models
 - [OSHA Stair and Rail Code Check](https://github.com/vibhanshu72/osha-stair-rail-code-check) -- Instant lookup tool for 29 CFR 1910 stairway requirements
