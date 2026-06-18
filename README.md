@@ -1,8 +1,8 @@
 # Procore Submittal and RFI Tracker
 
-> A Power Automate flow that automatically logs Procore "Action Required" email notifications into an Excel tracker -- no manual data entry required.
+> A Power Automate flow that automatically logs Procore Submittal and RFI email notifications into an Excel tracker, with no manual data entry required.
 
-Built by a structural engineer managing 20+ active projects simultaneously. This flow monitors your Outlook for incoming Procore action emails and extracts key submittal and RFI information directly into a structured Excel tracker hosted on OneDrive or SharePoint.
+Built by a structural engineer, this flow monitors your Outlook for incoming Procore action emails. It extracts key submittal and RFI information directly into a structured Excel tracker hosted on OneDrive or SharePoint.
 
 ---
 
