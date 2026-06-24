@@ -144,8 +144,8 @@ Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engi
 
 Specializing in steel and mission-critical structures. Building automation tools for structural engineering workflows that nobody else is covering. Feel free to connect on [LinkedIn](https://www.linkedin.com/in/vibhanshu9/)
 
-- [RISA-3D MCP Server](https://github.com/vibhanshu72/risa3d-mcp-server) -- Connect Claude AI to your RISA-3D structural models
-- [OSHA Stair and Rail Code Check](https://github.com/vibhanshu72/osha-stair-rail-code-check) -- Instant lookup tool for 29 CFR 1910 stairway requirements
+- [RISA-3D MCP Server](https://github.com/vibhanshu-mishra/risa3d-mcp-server) -- Connect Claude AI to your RISA-3D structural models
+- [TSD MCP Server](https://github.com/vibhanshu-mishra/tsd-mcp) -- Connect Claude AI to your TSD 
 
 ---
 
