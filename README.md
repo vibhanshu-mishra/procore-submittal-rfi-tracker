@@ -29,12 +29,12 @@ Every time Procore sends an "Action Required" email notification to your Outlook
 
 ## Features
 
-✅ Automatic Outlook monitoring
-✅ Automatic RFI detection
-✅ Automatic Submittal detection
-✅ Duplicate prevention
-✅ Excel logging
-✅ No coding required
+- Automatic Outlook monitoring
+- Automatic RFI detection
+- Automatic Submittal detection
+- Duplicate prevention
+- Excel logging
+- No coding required
 
 🚧 PDF downloading (coming in Phase 2)
 
@@ -159,7 +159,6 @@ Procore action emails may land in different places depending on your Outlook set
 - Save to project folders
 
 📅 Future Ideas
-
 - Automatic folder creation
 - PDF renaming
 - Procore API version
