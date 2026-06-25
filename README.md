@@ -172,7 +172,7 @@ Procore action emails may land in different places depending on your Outlook set
 
 Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engineers, Austin TX.
 
-Specializing in steel and mission-critical structures. Building practical automation tools that eliminate repetitive tasks in structural engineering workflows. Feel free to connect on [LinkedIn](https://www.linkedin.com/in/vibhanshu9/)
+Specialising in steel and mission-critical structures. Building practical automation tools that eliminate repetitive tasks in structural engineering workflows. 
 
 - 🔗 [RISA-3D MCP Server](https://github.com/vibhanshu-mishra/risa3d-mcp-server) — Connect Claude AI to your RISA-3D structural models
 - 🔗 [TSD MCP Server](https://github.com/vibhanshu-mishra/tsd-mcp) — Connect Claude AI to your TSD structural models
