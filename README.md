@@ -1,8 +1,18 @@
 # Procore Submittal and RFI Tracker
 
-> A Power Automate flow that automatically logs Procore Submittal and RFI email notifications into an Excel tracker, with no manual data entry required.
+> Automatically capture Procore Submittal and RFI email notifications, extract key project information, and log them into a structured Excel tracker—without manual data entry. Built with Microsoft Power Automate for structural engineering workflows.
 
-Built by a structural engineer, this flow monitors your Outlook for incoming Procore action emails. It extracts key submittal and RFI information directly into a structured Excel tracker hosted on OneDrive or SharePoint.
+Built by a structural engineer, this flow monitors your Outlook for incoming Procore action emails. It extracts key submittal and RFI information directly into a structured Excel tracker hosted on OneDrive or SharePoint. No coding is required to use this workflow. Simply import the Power Automate package, connect your Microsoft 365 account, and point the flow to your Excel tracker.
+
+---
+
+## Why I Built This
+
+As a structural engineer, I was spending time manually tracking incoming RFIs and submittals, almost wasting roughly 40 hours per year.
+
+Instead of copying information into spreadsheets, I built a Power Automate workflow that performs the extraction automatically.
+
+The result is a searchable tracker that stays up to date with zero manual data entry.
 
 ---
 
@@ -17,9 +27,16 @@ Every time Procore sends an "Action Required" email notification to your Outlook
 
 ---
 
-## What This Is Not
+## Features
 
-This is **Phase 1 only** -- email parsing and Excel logging. PDF download to a network drive is a separate phase and is not included in this release.
+✅ Automatic Outlook monitoring
+✅ Automatic RFI detection
+✅ Automatic Submittal detection
+✅ Duplicate prevention
+✅ Excel logging
+✅ No coding required
+
+🚧 PDF downloading (coming in Phase 2)
 
 ---
 
@@ -98,7 +115,7 @@ Upload `Submittal-RFI-Tracker.xlsx` to your OneDrive or a SharePoint document li
 Procore action emails may land in different places depending on your Outlook setup:
 
 - **If you have Outlook rules routing Procore emails to a specific folder:** open the flow, find the trigger step (named "When a new email arrives"), and change the folder from Inbox to the correct project or Procore folder.
-- **If you have no Outlook rules:** leave the trigger pointed at Inbox. The flow will process all incoming emails and skip any that are not from Procore.
+- **If you have no Outlook rules:** leave the trigger pointed at the Inbox. The flow will process all incoming emails and skip any that are not from Procore.
 
 ---
 
@@ -133,8 +150,22 @@ Procore action emails may land in different places depending on your Outlook set
 
 ## Roadmap
 
-- [x] Phase 1 -- Extract submittal and RFI data from Procore emails and log to Excel
-- [ ] Phase 2 -- Download submittal and RFI PDFs from Procore emails and save to network drive
+✅ Phase 1
+- Email parsing
+- Excel logging
+
+🚧 Phase 2
+- Download PDFs
+- Save to project folders
+
+📅 Future Ideas
+
+- Automatic folder creation
+- PDF renaming
+- Procore API version
+- SharePoint integration
+- Teams notifications
+- Dashboard reporting
 
 ---
 
@@ -142,7 +173,7 @@ Procore action emails may land in different places depending on your Outlook set
 
 Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engineers, Austin TX.
 
-Specializing in steel and mission-critical structures. Building automation tools for structural engineering workflows that nobody else is covering. Feel free to connect on [LinkedIn](https://www.linkedin.com/in/vibhanshu9/)
+Specializing in steel and mission-critical structures. Building practical automation tools that eliminate repetitive tasks in structural engineering workflows. Feel free to connect on [LinkedIn](https://www.linkedin.com/in/vibhanshu9/)
 
 - [RISA-3D MCP Server](https://github.com/vibhanshu-mishra/risa3d-mcp-server) -- Connect Claude AI to your RISA-3D structural models
 - [TSD MCP Server](https://github.com/vibhanshu-mishra/tsd-mcp) -- Connect Claude AI to your TSD 
