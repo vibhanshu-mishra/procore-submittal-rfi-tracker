@@ -33,7 +33,7 @@ The workflow is composed of two independent processing pipelines:
   - Extract metadata
   - Create project folder
   - Download cover sheet
-  - Download available RFI attachments
+  - Download available RFI attachments (authentication dependent)
   - Update Excel tracker
 
 - **Submittal Processing**
@@ -55,7 +55,7 @@ Every time Procore sends an Action Required notification, the flow automatically
 3. Checks for duplicate notifications.
 4. Creates the appropriate project folder.
 5. Downloads the Cover Sheet PDF.
-6. Downloads available RFI attachments directly from the email.
+6. Detects available RFI attachments for future authenticated download support.
 7. Records the notification in the Excel tracker.
 8. Detects Original and Approver PDFs for future authenticated download support.
 
@@ -77,18 +77,18 @@ Every time Procore sends an Action Required notification, the flow automatically
 - Automatic RFI folder creation
 - Automatic Submittal folder creation
 - Automatic cover sheet download
-- Automatic RFI attachment download when links are exposed in the email
 
 ### Tracking
 
 - Excel logging
-- Structured folder organization
+- Structured folder organisation
 - No coding required
 
 ### Current Limitations
 
 - Original Submittal PDFs require authenticated Procore access
 - Approver PDFs require authenticated Procore access
+- RFI Attachments require authenticated Procore access
 
 ---
 
@@ -209,12 +209,13 @@ Procore action emails may land in different places depending on your Outlook set
 
 - Outlook monitoring
 - Email parsing
+- Metadata extraction
+- Duplicate detection
 - RFI processing
 - Submittal processing
-- Duplicate detection
 - Automatic folder creation
 - Cover Sheet download
-- RFI attachment download
+- RFI attachment download (where exposed)
 - Excel tracking
 
 ### 🚧 In Progress
@@ -236,7 +237,7 @@ Procore action emails may land in different places depending on your Outlook set
 
 This project intentionally relies only on Procore notification emails and standard Microsoft 365 connectors.
 
-Because Original Submittal PDFs and Approver PDFs require authenticated Procore sessions, they cannot currently be downloaded using anonymous HTTP requests. These capabilities are planned for a future API-based implementation.
+Because Original Submittal PDFs and Approver PDFs are served behind authenticated Procore sessions, they cannot currently be downloaded using the standard Power Automate HTTP connector. These downloads are planned for a future Procore API or authenticated session implementation.
 
 RFI attachments are downloaded only when the attachment URL is included in the notification email. Attachments added after the email is sent cannot be retrieved without the Procore API.
 
