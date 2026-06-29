@@ -21,28 +21,28 @@ The result is a searchable tracker that stays up to date with zero manual data e
 ```
                          Outlook
                             │
-                  New Procore Email
+                     New Procore Email
                             │
             ┌───────────────┴───────────────┐
             │                               │
            RFI                         Submittal
             │                               │
-      Parse Email                    Parse Email
+       Parse Email                     Parse Email
             │                               │
-      Create Folder                 Create Folder
+      Create Folder                   Create Folder
             │                               │
-      Cover Sheet PDF              Cover Sheet PDF
+    Cover Sheet PDF                 Cover Sheet PDF
             │                               │
-      Attachment(s)          Original / Approver*
+      Attachment(s)*                Original / Approver*
             │                               │
             └───────────────┬───────────────┘
                             │
-                  Network File Server
+                   Network File Server
                             │
-                    Excel Tracking Log
+                  Excel Tracking Log
 ```
 
-\* Original and Approver PDFs depend on Procore authentication and may require API integration.
+\* depends on Procore authentication and may require API integration.
 
 ---
 
