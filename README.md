@@ -16,57 +16,81 @@ The result is a searchable tracker that stays up to date with zero manual data e
 
 ---
 
+## Workflow Overview
+
+<p align="center">
+<img src="images/workflow-overview.png" width="900">
+</p>
+
+The flow monitors Outlook for incoming Procore notifications, automatically classifies each email as either an RFI or a Submittal, extracts project metadata, organises project folders, downloads available PDFs, and maintains an up-to-date Excel tracker.
+
+---
+
 ## Architecture
 
-```
-                         Outlook
-                            │
-                     New Procore Email
-                            │
-            ┌───────────────┴───────────────┐
-            │                               │
-           RFI                         Submittal
-            │                               │
-       Parse Email                     Parse Email
-            │                               │
-      Create Folder                   Create Folder
-            │                               │
-    Cover Sheet PDF                 Cover Sheet PDF
-            │                               │
-      Attachment(s)*                Original / Approver*
-            │                               │
-            └───────────────┬───────────────┘
-                            │
-                   Network File Server
-                            │
-                  Excel Tracking Log
-```
+The workflow is composed of two independent processing pipelines:
 
-\* depends on Procore authentication and may require API integration.
+- **RFI Processing**
+  - Parse email
+  - Extract metadata
+  - Create project folder
+  - Download cover sheet
+  - Download available RFI attachments
+  - Update Excel tracker
+
+- **Submittal Processing**
+  - Parse email
+  - Extract metadata
+  - Create project folder
+  - Download cover sheet
+  - Update Excel tracker
+  - Detect Original and Approver PDFs (authentication dependent)
 
 ---
 
 ## What It Does
 
-Every time Procore sends an "Action Required" email notification to your Outlook (for a submittal or RFI), the flow:
+Every time Procore sends an Action Required notification, the flow automatically:
 
-1. Detects whether the email is a submittal or an RFI notification
-2. Extracts the project number, project name, submittal/RFI name, RFI number, date received, and due date from the email body
-3. Checks for duplicates so the same item is not logged twice
-4. Appends a new row to the correct sheet in the Excel tracker (Table1 for Submittals, Table2 for RFIs)
+1. Detects whether the email is an RFI or a Submittal.
+2. Extracts project information and due dates.
+3. Checks for duplicate notifications.
+4. Creates the appropriate project folder.
+5. Downloads the Cover Sheet PDF.
+6. Downloads available RFI attachments directly from the email.
+7. Records the notification in the Excel tracker.
+8. Detects Original and Approver PDFs for future authenticated download support.
 
 ---
 
 ## Features
 
+### Email Processing
+
 - Automatic Outlook monitoring
 - Automatic RFI detection
 - Automatic Submittal detection
+- Automatic metadata extraction
 - Duplicate prevention
+
+### File Management
+
+- Automatic project folder creation
+- Automatic RFI folder creation
+- Automatic Submittal folder creation
+- Automatic cover sheet download
+- Automatic RFI attachment download (when available in email)
+
+### Tracking
+
 - Excel logging
+- Structured folder organization
 - No coding required
 
-🚧 PDF downloading (coming in Phase 2)
+### Current Limitations
+
+- Original Submittal PDFs require authenticated Procore access
+- Approver PDFs require authenticated Procore access
 
 ---
 
@@ -178,23 +202,42 @@ Procore action emails may land in different places depending on your Outlook set
 
 ---
 
-## Roadmap
+## Project Status
 
-✅ Phase 1
+### ✅ Implemented
+
+- Outlook monitoring
 - Email parsing
-- Excel logging
-
-🚧 Phase 2
-- Download PDFs
-- Save to project folders
-
-📅 Future Ideas
+- RFI processing
+- Submittal processing
+- Duplicate detection
 - Automatic folder creation
-- PDF renaming
-- Procore API version
-- SharePoint integration
+- Cover Sheet download
+- RFI attachment download
+- Excel tracking
+
+### 🚧 In Progress
+
+- Authenticated Original Submittal downloads
+- Authenticated Approver PDF downloads
+
+### 🔮 Future Enhancements
+
+- Procore API integration
 - Teams notifications
+- SharePoint integration
 - Dashboard reporting
+- AI-assisted document classification
+
+---
+
+## Known Limitations
+
+This project intentionally relies only on Procore notification emails and standard Microsoft 365 connectors.
+
+Because Original Submittal PDFs and Approver PDFs require authenticated Procore sessions, they cannot currently be downloaded using anonymous HTTP requests. These capabilities are planned for a future API-based implementation.
+
+RFI attachments are downloaded only when the attachment URL is included in the notification email. Attachments added after the email is sent cannot be retrieved without the Procore API.
 
 ---
 
