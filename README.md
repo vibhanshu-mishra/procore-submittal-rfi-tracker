@@ -77,7 +77,7 @@ Every time Procore sends an Action Required notification, the flow automatically
 - Automatic RFI folder creation
 - Automatic Submittal folder creation
 - Automatic cover sheet download
-- Automatic RFI attachment download (when available in email)
+- Automatic RFI attachment download when links are exposed in the email
 
 ### Tracking
 
@@ -101,6 +101,8 @@ You need the following before setting this up:
 - **OneDrive or SharePoint** -- where the Excel tracker file is hosted; the flow reads from and writes to this file
 - **A Procore account** -- the flow is designed around the email format that Procore sends for action-required notifications; it will not work with other project management tools
 - **The Excel tracker file** -- a pre-configured `.xlsx` file with Table1 (Submittals) and Table2 (RFIs) already set up; a blank template is included in this repository
+- **On-premises data gateway / File System connector** -- required if saving PDFs to a local or network file server.
+- **Network folder mapping table** -- required if using automatic folder creation and PDF saving; the Excel tracker must include project-specific folder paths.
 
 ---
 
@@ -158,6 +160,7 @@ Upload `Submittal-RFI-Tracker.xlsx` to your OneDrive or a SharePoint document li
 5. On the import screen, review each resource and click the wrench icon to connect your own accounts:
    - **Outlook connection** -- connect to your Microsoft 365 account
    - **Excel Online (Business) connection** -- connect to your Microsoft 365 account
+   - **File System connection** -- connect through the on-premises data gateway if saving PDFs to a network drive
 6. Click **Import**
 
 ---
