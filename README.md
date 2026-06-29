@@ -8,11 +8,43 @@ Built by a structural engineer, this flow monitors your Outlook for incoming Pro
 
 ## Why I Built This
 
-As a structural engineer, I was spending time manually tracking incoming RFIs and submittals, almost wasting roughly 40 hours per year.
+As a structural engineer, I was spending time manually tracking incoming RFIs and submittals, wasting roughly 40 hours per year.
 
 Instead of copying information into spreadsheets, I built a Power Automate workflow that performs the extraction automatically.
 
 The result is a searchable tracker that stays up to date with zero manual data entry.
+
+---
+
+## Architecture
+
+## Architecture
+
+```
+                         Outlook
+                            │
+                  New Procore Email
+                            │
+            ┌───────────────┴───────────────┐
+            │                               │
+           RFI                         Submittal
+            │                               │
+      Parse Email                    Parse Email
+            │                               │
+      Create Folder                 Create Folder
+            │                               │
+      Cover Sheet PDF              Cover Sheet PDF
+            │                               │
+      Attachment(s)          Original / Approver*
+            │                               │
+            └───────────────┬───────────────┘
+                            │
+                  Network File Server
+                            │
+                    Excel Tracking Log
+```
+
+\* Original and Approver PDFs depend on Procore authentication and may require API integration.
 
 ---
 
