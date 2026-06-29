@@ -18,9 +18,7 @@ The result is a searchable tracker that stays up to date with zero manual data e
 
 ## Workflow Overview
 
-<p align="center">
-  <img src="images/workflow-overview.png" width="900">
-</p>
+![Workflow Overview](images/workflow-overview.png)
 
 The flow monitors Outlook for incoming Procore notifications, automatically classifies each email as either an RFI or a Submittal, extracts project metadata, organises project folders, downloads available PDFs, and maintains an up-to-date Excel tracker.
 
