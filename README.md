@@ -250,5 +250,5 @@ Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engi
 Specialising in steel and mission-critical structures. Building practical automation tools that eliminate repetitive tasks in structural engineering workflows. 
 
 - 🔗 [RISA-3D MCP Server](https://github.com/vibhanshu-mishra/risa3d-mcp-server) — Connect Claude AI to your RISA-3D structural models
-- 🔗 [TSD MCP Server](https://github.com/vibhanshu-mishra/tsd-mcp) — Connect Claude AI to your TSD structural models
+- 🔗 [Tekla Structural Designer MCP Server](https://github.com/vibhanshu-mishra/tsd-mcp) — Connect Claude AI to your TSD structural models
 - 💼 Connect on [LinkedIn](https://www.linkedin.com/in/vibhanshu9/)
