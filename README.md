@@ -18,8 +18,6 @@ The result is a searchable tracker that stays up to date with zero manual data e
 
 ## Architecture
 
-## Architecture
-
 ```
                          Outlook
                             │
