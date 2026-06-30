@@ -1,18 +1,20 @@
 # Procore Submittal and RFI Tracker
 
-> Automatically capture Procore Submittal and RFI email notifications, extract key project information, and log them into a structured Excel tracker—without manual data entry. Built with Microsoft Power Automate for structural engineering workflows.
+> Automatically capture Procore Submittal and RFI email notifications, organise project folders, download available project PDFs, and maintain a structured Excel tracker—without manual data entry. Built with Microsoft Power Automate for structural engineering workflows.
 
-Built by a structural engineer, this flow monitors your Outlook for incoming Procore action emails. It extracts key submittal and RFI information directly into a structured Excel tracker hosted on OneDrive or SharePoint. No coding is required to use this workflow. Simply import the Power Automate package, connect your Microsoft 365 account, and point the flow to your Excel tracker.
+Built by a structural engineer, this Power Automate workflow monitors Outlook for incoming Procore action-required notifications and automatically classifies each email as either an RFI or a Submittal. It extracts project metadata, creates project folders on a network file server, downloads available Cover Sheets and RFI attachments, and maintains a searchable Excel tracker hosted on OneDrive or SharePoint.
+
+No coding is required to use this workflow. Simply import the Power Automate package, connect your Microsoft 365 accounts, configure the File System connector (if saving PDFs to a network drive), and point the flow to your Excel tracker.
 
 ---
 
 ## Why I Built This
 
-As a structural engineer, I was spending time manually tracking incoming RFIs and submittals, wasting roughly 40 hours per year.
+As a structural engineer, I was spending time manually tracking RFIs and submittals, creating project folders, downloading PDFs, and updating spreadsheets. Individually, these tasks were small, but together they consumed dozens of hours each year.
 
-Instead of copying information into spreadsheets, I built a Power Automate workflow that performs the extraction automatically.
+Instead of repeating the same administrative work for every project, I built a Power Automate workflow that automates the entire intake process—from the moment a Procore notification arrives to organising project documents and updating the tracker.
 
-The result is a searchable tracker that stays up to date with zero manual data entry.
+The result is a searchable, organised project record that stays up to date with virtually no manual data entry.
 
 ---
 
@@ -33,7 +35,7 @@ The workflow is composed of two independent processing pipelines:
   - Extract metadata
   - Create project folder
   - Download cover sheet
-  - Download available RFI attachments (authentication dependent)
+  - Download available RFI attachments (works when Procore exposes the attachment URL in the email)
   - Update Excel tracker
 
 - **Submittal Processing**
@@ -55,7 +57,7 @@ Every time Procore sends an Action Required notification, the flow automatically
 3. Checks for duplicate notifications.
 4. Creates the appropriate project folder.
 5. Downloads the Cover Sheet PDF.
-6. Detects available RFI attachments for future authenticated download support.
+6. Downloads available RFI attachments when Procore exposes the attachment URL in the email.
 7. Records the notification in the Excel tracker.
 8. Detects Original and Approver PDFs for future authenticated download support.
 
@@ -76,7 +78,7 @@ Every time Procore sends an Action Required notification, the flow automatically
 - Automatic project folder creation
 - Automatic RFI folder creation
 - Automatic Submittal folder creation
-- Automatic cover sheet download
+- Automatic cover sheet and attachment download
 
 ### Tracking
 
@@ -88,7 +90,7 @@ Every time Procore sends an Action Required notification, the flow automatically
 
 - Original Submittal PDFs require authenticated Procore access
 - Approver PDFs require authenticated Procore access
-- RFI Attachments require authenticated Procore access
+- RFI Attachments work only when Procore exposes the attachment URL in the email
 
 ---
 
@@ -215,7 +217,7 @@ Procore action emails may land in different places depending on your Outlook set
 - Submittal processing
 - Automatic folder creation
 - Cover Sheet download
-- RFI attachment download (where exposed)
+- RFI attachment download (when exposed)
 - Excel tracking
 
 ### 🚧 In Progress
