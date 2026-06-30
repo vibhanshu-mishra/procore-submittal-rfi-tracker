@@ -142,14 +142,14 @@ Download the blank tracker template from this repository and upload it to your O
 ### Step 1 -- Download the files
 
 Download both files from this repository:
-- `procore-submittal-rfi-tracker.zip` -- the Power Automate flow package
-- `Submittal-RFI-Tracker.xlsx` -- the blank Excel tracker template
+- `ProcoreRFI&SubmittalTracker.zip` -- the Power Automate flow package
+- `Tracker.xlsx` -- the blank Excel tracker template
 
 ---
 
 ### Step 2 -- Upload the Excel tracker
 
-Upload `Submittal-RFI-Tracker.xlsx` to your OneDrive or a SharePoint document library. Note the location -- you will need to point the flow at this file during setup.
+Upload `Tracker.xlsx` to your OneDrive or a SharePoint document library. Note the location -- you will need to point the flow at this file during setup.
 
 ---
 
@@ -158,7 +158,7 @@ Upload `Submittal-RFI-Tracker.xlsx` to your OneDrive or a SharePoint document li
 1. Go to [make.powerautomate.com](https://make.powerautomate.com)
 2. In the left sidebar, click **My flows**
 3. Click **Import** at the top -> **Import Package (Legacy)**
-4. Upload `procore-submittal-rfi-tracker.zip`
+4. Upload `ProcoreRFI&SubmittalTracker.zip`
 5. On the import screen, review each resource and click the wrench icon to connect your own accounts:
    - **Outlook connection** -- connect to your Microsoft 365 account
    - **Excel Online (Business) connection** -- connect to your Microsoft 365 account
@@ -180,7 +180,7 @@ Procore action emails may land in different places depending on your Outlook set
 
 1. Open the imported flow and click **Edit**
 2. Find the steps named **Add a row into a table -- Submittals** and **Add a row into a table -- RFIs**
-3. In each step, update the **Location**, **Document Library**, **File**, and **Table** fields to point at the `Submittal-RFI-Tracker.xlsx` file you uploaded in Step 2
+3. In each step, update the **Location**, **Document Library**, **File**, and **Table** fields to point at the `Tracker.xlsx` file you uploaded in Step 2
 4. Save the flow
 
 ---
@@ -197,11 +197,11 @@ Procore action emails may land in different places depending on your Outlook set
 
 **Procore email format dependency.** This flow is built around the specific email format that Procore uses for "Action Required" notifications. If Procore changes its email format, expressions in the flow may need to be updated.
 
-**Outlook folder monitoring.** Power Automate can only monitor one Outlook folder per trigger. If your Outlook routes Procore emails into multiple project-specific folders using rules, you will need either a separate flow per folder or a consolidated folder that all Procore emails pass through. This is a known limitation of the current setup.
+**Outlook folder monitoring.** Power Automate can only monitor one Outlook folder per trigger. If your Outlook routes Procore emails to multiple project-specific folders using rules, you will need either a separate flow for each folder or a consolidated folder that all Procore emails pass through. This is a known limitation of the current setup.
 
 **Duplicate detection.** The flow checks for duplicates before adding a row. For submittals, it checks the Submittal Name plus the Project Name. For RFIs, it checks the RFI Number plus the Project Name. If the same notification arrives twice (which can happen when multiple team members are copied), it will not create a duplicate row.
 
-**This is a reference implementation.** The flow was built and validated against my firm's Procore and Outlook setup. Variable names, folder paths, and email parsing expressions may need adjustment for your environment.
+**This is a reference implementation.** The flow was built and validated against my firm's Procore and Outlook setup. Variable names, folder paths, and email parsing expressions may need to be adjusted for your environment.
 
 ---
 
@@ -247,7 +247,7 @@ RFI attachments are downloaded only when the attachment URL is included in the n
 
 ## About
 
-Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engineers, Austin TX.
+Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engineers, Austin, TX.
 
 Specialising in steel and mission-critical structures. Building practical automation tools that eliminate repetitive tasks in structural engineering workflows. 
 
