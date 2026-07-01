@@ -243,6 +243,8 @@ Because Original Submittal PDFs and Approver PDFs are served behind authenticate
 
 RFI attachments are downloaded only when the attachment URL is included in the notification email. Attachments added after the email is sent cannot be retrieved without the Procore API.
 
+For API-based downloads, the Procore company that owns the project must authorize the app and grant the required permissions. If your firm is only a collaborator on another company's Procore project, email-based automation may be the most practical approach.
+
 ---
 
 ## About
