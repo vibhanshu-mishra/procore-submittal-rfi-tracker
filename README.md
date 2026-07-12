@@ -249,7 +249,7 @@ For API-based downloads, the Procore company that owns the project must authoriz
 
 ## About
 
-Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engineers, Austin, TX.
+Built by **Vibhanshu Mishra, PE** -- Structural Engineer at AG&E Structural Engenuity, Austin, TX.
 
 Specialising in steel and mission-critical structures. Building practical automation tools that eliminate repetitive tasks in structural engineering workflows. 
 
