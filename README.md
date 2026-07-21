@@ -1,6 +1,6 @@
 # Procore Submittal and RFI Tracker
 
-> Automatically capture Procore Submittal and RFI email notifications, organise project folders, download available project PDFs, and maintain a structured Excel tracker—without manual data entry. Built with Microsoft Power Automate for structural engineering workflows.
+> Automatically capture Procore Submittal and RFI email notifications, organise project folders, download available project PDFs, and maintain a structured Excel tracker without manual data entry. Built with Microsoft Power Automate for structural engineering workflows.
 
 Built by a structural engineer, this Power Automate workflow monitors Outlook for incoming Procore action-required notifications and automatically classifies each email as either an RFI or a Submittal. It extracts project metadata, creates project folders on a network file server, downloads available Cover Sheets and RFI attachments, and maintains a searchable Excel tracker hosted on OneDrive or SharePoint.
 
@@ -228,6 +228,7 @@ Procore action emails may land in different places depending on your Outlook set
 ### 🔮 Future Enhancements
 
 - Procore API integration
+- Teams Planner integration instead of Excel
 - Teams notifications
 - SharePoint integration
 - Dashboard reporting
@@ -243,7 +244,7 @@ Because Original Submittal PDFs and Approver PDFs are served behind authenticate
 
 RFI attachments are downloaded only when the attachment URL is included in the notification email. Attachments added after the email is sent cannot be retrieved without the Procore API.
 
-For API-based downloads, the Procore company that owns the project must authorize the app and grant the required permissions. If your firm is only a collaborator on another company's Procore project, email-based automation may be the most practical approach.
+For API-based downloads, the Procore company that owns the project must authorise the app and grant the required permissions. If your firm is only a collaborator on another company's Procore project, email-based automation may be the most practical approach.
 
 ---
 
