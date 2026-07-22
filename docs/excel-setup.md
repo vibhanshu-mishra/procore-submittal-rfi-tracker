@@ -67,8 +67,8 @@ Project matching is normally exact. `Project Name`, `Project Name `, and an abbr
 
 Keep cloud/gateway and desktop paths separate when their runtimes see storage differently. For example:
 
-- Cloud/gateway: `\\fileserver\Projects\25000-25999\Project Name\RFIs`
-- Desktop: `Z:\25000-25999\Project Name\RFIs`
+- Cloud/gateway: `\\fileserver\Projects\Project Name\RFIs`
+- Desktop: `A:\Project Name\RFIs`
 
 See [folder mapping](folder-mapping.md).
 
