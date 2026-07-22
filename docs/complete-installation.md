@@ -35,6 +35,8 @@ Review its Downloads folder, retry interval, maximum attempts, temporary-extensi
 4. Configure the cloud action for **attended** mode.
 5. Keep the Windows user signed in with an active session for test runs.
 
+Use [How to Find Your UNC Path and Windows Domain](critical-setup-details.md#how-to-find-your-unc-path-and-windows-domain) to verify the network path and whether the connection expects a username such as `COMPANY\jsmith` or `jsmith@company.com`. Confirm the actual gateway or service account with IT; it may differ from the signed-in desktop user.
+
 ## 4. Prepare Chrome
 
 Install/enable the Power Automate browser integration. Sign in to Procore under the same Windows/Chrome profile the desktop run uses. Open a representative attachment URL manually and confirm that it downloads without an extra prompt. Do not store a Procore password in flow variables.

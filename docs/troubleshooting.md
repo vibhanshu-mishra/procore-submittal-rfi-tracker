@@ -54,6 +54,33 @@ For the required variable placement, two-loop design, immediate-loop binding, an
 - Confirm the gateway can reach UNC paths and the desktop session can resolve mapped drives.
 - Verify create, write, and move permissions. See [folder mapping](folder-mapping.md).
 
+## `net use` does not show the mapped drive
+
+- Open File Explorer and click the drive once, then run `net use` again.
+- Run `net use Z:` to inspect that drive directly.
+- Use a normal, non-elevated Command Prompt under the Windows user who sees the drive.
+- Check whether the drive is disconnected, belongs to another user session, or depends on a login script.
+- The location may be a shortcut or DFS path rather than a mapped drive; ask IT for its UNC path if needed.
+
+## `wmic` is not recognized
+
+WMIC is deprecated and may be absent on newer Windows systems. Open PowerShell and run `(Get-CimInstance Win32_ComputerSystem).Domain`. `$env:USERDOMAIN`, `whoami`, and `whoami /upn` can also help identify the short domain and username formats.
+
+## UNC path works for me but fails through the gateway
+
+- Identify the Windows account used by the gateway service and File System connection; it may not be your desktop account.
+- Confirm that account has both share and NTFS permissions.
+- Check server-name resolution, firewall, and VPN requirements from the gateway computer.
+- Confirm the gateway and Power Automate environment use compatible regions.
+- Recheck the connection credentials and configured root against the flow's paths.
+
+## Mapped drive works in File Explorer but not in Power Automate Desktop
+
+- Confirm PAD runs under the same Windows user and elevation level as the session that owns the mapping.
+- Reconnect the mapped drive after sign-in and test it in that session.
+- Confirm the UNC-to-drive prefix conversion is exact and the destination already exists.
+- See [How to Find Your UNC Path and Windows Domain](critical-setup-details.md#how-to-find-your-unc-path-and-windows-domain) for the complete checks.
+
 ## Community attachment download fails
 
 - Determine whether the URL redirects to Procore sign-in or depends on cookies.

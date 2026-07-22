@@ -40,6 +40,7 @@ Before importing or editing either edition, review the [Critical Setup Details](
 - Bind `AttachmentURL` to **Current item** from the immediate final attachment loop.
 - Keep the final attachment loop sequential and consider overlap between separate email-triggered runs.
 - Pass the correct Windows-visible `DestinationFolder`, and create that folder before the desktop flow starts.
+- [Discover the UNC path behind a mapped drive with `net use`, find the Windows domain, and verify which Windows account the gateway/File System connection uses](docs/critical-setup-details.md#how-to-find-your-unc-path-and-windows-domain).
 - Use Power Fx syntax consistently in the provided desktop-flow design.
 
 The critical guide includes safe placeholder paths, required input definitions, file-detection behavior, authentication constraints, filename handling, and the required test cases.
@@ -117,7 +118,7 @@ See [Excel setup](docs/excel-setup.md).
 
 ## Folder mapping
 
-Cloud actions may use a gateway-visible UNC path such as `\\fileserver\Projects\25000-25999\Project Name\RFIs`, while the attended desktop flow may receive `Z:\25000-25999\Project Name\RFIs`. These are different representations of the same location and must be tested under the accounts that run each flow. The desktop destination must already exist before a move.
+Cloud actions may use a gateway-visible UNC path such as `\\fileserver.company.local\Projects\25000-25999\Project Name\RFIs`, while the attended desktop flow may receive `Z:\25000-25999\Project Name\RFIs`. These are different representations of the same location and must be tested under the accounts that run each flow. The desktop destination must already exist before a move.
 
 See [folder mapping](docs/folder-mapping.md).
 

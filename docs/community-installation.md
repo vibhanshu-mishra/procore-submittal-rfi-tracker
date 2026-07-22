@@ -35,7 +35,7 @@ For every Excel lookup and add-row action, select the correct Location, Document
 
 ## 5. Configure storage and mappings
 
-Replace sample paths with neutral, environment-specific mappings. For network storage, create a gateway File System connection whose account can reach paths such as `\\fileserver\Projects\25000-25999\Project Name\RFIs`. Test read, folder-create, and write permissions. See [folder mapping](folder-mapping.md).
+Replace sample paths with neutral, environment-specific mappings. For network storage, create a gateway File System connection whose account can reach paths such as `\\fileserver.company.local\Projects\25000-25999\Project Name\RFIs`. Test read, folder-create, and write permissions. If you know only a mapped drive letter, [discover its UNC path and your Windows domain](critical-setup-details.md#how-to-find-your-unc-path-and-windows-domain) before creating the connection. See [folder mapping](folder-mapping.md).
 
 ## 6. Validate parsing
 

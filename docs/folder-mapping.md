@@ -6,18 +6,20 @@ Folder paths must be valid from the runtime that uses them. The cloud File Syste
 
 Review the path-conversion expression and execution-order requirements in [Critical Setup Details](critical-setup-details.md) before configuring the Complete Edition.
 
+If you know only a mapped drive letter, follow [How to Find Your UNC Path and Windows Domain](critical-setup-details.md#how-to-find-your-unc-path-and-windows-domain) to identify its UNC root, verify gateway access, and determine the appropriate Windows username format.
+
 ## Path examples
 
 UNC path used by a gateway or Windows user:
 
 ```text
-\\fileserver\Projects\Project Name\RFIs
+\\fileserver.company.local\Projects\25000-25999\Project Name\RFIs
 ```
 
 Mapped-drive path used by the attended desktop session:
 
 ```text
-A:\Project Name\Submittals
+Z:\25000-25999\Project Name\Submittals
 ```
 
 Use placeholders in public documentation and screenshots. Do not publish a real server or project path.
@@ -31,34 +33,34 @@ A generic conversion expression is:
 ```text
 replace(
   outputs('Full_Submittal_Folder_Path'),
-  '\\fileserver\Projects\A-Drive\',
-  'A:\'
+  '\\fileserver.company.local\Projects\',
+  'Z:\'
 )
 ```
 
-The real UNC prefix varies by company. Substitute the private server/share prefix in the actual flow, never in public documentation. This replacement is valid only if that prefix maps to `A:` for the desktop user.
+The real UNC prefix varies by company. Substitute the private server/share prefix in the actual flow, never in public documentation. This replacement is valid only if that prefix maps to `Z:` for the desktop user.
 
 ## Converting UNC to mapped drive
 
 Suppose Windows maps this network root:
 
 ```text
-\\fileserver\share\A-Drive
+\\fileserver.company.local\Projects
 ```
 
-to drive `A:`. Convert:
+to drive `Z:`. Convert:
 
 ```text
-\\fileserver\share\A-Drive\Project Name\RFIs
+\\fileserver.company.local\Projects\25000-25999\Project Name\RFIs
 ```
 
 to:
 
 ```text
-A:\Project Name\RFIs
+Z:\25000-25999\Project Name\RFIs
 ```
 
-Do not merely replace the server prefix unless that exact share is mapped to `A:` for the automation user.
+Do not merely replace the server prefix unless that exact share is mapped to `Z:` for the automation user.
 
 ## Test in File Explorer
 

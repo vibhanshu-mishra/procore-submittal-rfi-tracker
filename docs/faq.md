@@ -34,6 +34,30 @@ The desktop flow watches a shared Downloads folder and identifies a new file usi
 
 Yes, if the account and runtime can resolve the UNC path and have permission. Mapped drives are session-specific, so UNC is often more predictable, but test the exact path under the gateway and attended desktop identities. See [folder mapping](folder-mapping.md).
 
+## How do I find the UNC path behind my `Z:` drive?
+
+Open a normal, non-elevated Command Prompt as the user who sees the drive and run `net use` or `net use Z:`. Record the **Remote** value for `Z:` and verify it in File Explorer. See the [step-by-step discovery guide](critical-setup-details.md#how-to-find-your-unc-path-and-windows-domain).
+
+## How do I find my Windows domain?
+
+Open PowerShell and run `(Get-CimInstance Win32_ComputerSystem).Domain`. Use `$env:USERDOMAIN`, `whoami`, and `whoami /upn` to see the short domain and common username formats.
+
+## Why does `net use` show no mapped drives?
+
+The drive may belong only to your normal user session, be disconnected, depend on an incomplete login script, or be a shortcut/DFS path rather than a true mapping. Avoid an elevated Command Prompt, open the drive once in File Explorer, retry `net use Z:`, and ask IT for the UNC path if it remains hidden.
+
+## Why does the UNC path work for me but fail through the gateway?
+
+The gateway or File System connection may use a different Windows account. Confirm that account has share and NTFS permissions and that the gateway computer has the required name resolution, network, firewall, and VPN access.
+
+## Should I use `COMPANY\username` or `username@company.com`?
+
+Both are common. Use the format your organization expects for the Windows account that can access the share, and confirm the gateway or service account with IT if authentication fails. Never put the password or real credentials in documentation or GitHub.
+
+## Why does WMIC not work on my computer?
+
+WMIC is deprecated and may not be installed on newer Windows versions. Use the preferred PowerShell command `(Get-CimInstance Win32_ComputerSystem).Domain` instead.
+
 ## Why does `Current item` cause an `InvalidTemplate` error?
 
 The token may belong to an older or outer loop, especially after actions were copied. Delete it and select **Current item** from the immediate final `Apply to each AttachmentURLs` loop containing the desktop action.

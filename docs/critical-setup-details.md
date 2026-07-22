@@ -4,6 +4,190 @@
 
 These details are easy to miss because a flow can save or import successfully while still containing a wrong path, variable scope, loop reference, or desktop expression. Use only your own environment values in the actual flows. Never publish internal server names, company paths, signed URLs, project IDs, email addresses, or credentials.
 
+## How to Find Your UNC Path and Windows Domain
+
+Users often know a project location only by a mapped drive letter such as `Z:\`, but the Power Automate File System connection may require its underlying UNC path, such as `\\fileserver.company.local\Projects`. Use the steps below on the Windows computer that can access the project folders.
+
+### Part 1 — Find the UNC path behind a mapped drive
+
+Open Command Prompt as your normal Windows user; Administrator access is not normally required. Run:
+
+```cmd
+net use
+```
+
+The output includes these columns:
+
+- **Status** shows whether the connection is available.
+- **Local** is the mapped drive letter, such as `Z:`.
+- **Remote** is the UNC path, such as `\\fileserver.company.local\Projects`.
+- **Network** identifies the network provider or connection type.
+
+Find the row whose **Local** value matches the drive used for the project folders and record its **Remote** value. For example:
+
+```text
+Status       Local     Remote
+OK           Z:        \\fileserver.company.local\Projects
+```
+
+The UNC root for `Z:` in this example is `\\fileserver.company.local\Projects`. Therefore:
+
+```text
+Z:\25000-25999\Project Name\Submittals
+```
+
+is the same location as:
+
+```text
+\\fileserver.company.local\Projects\25000-25999\Project Name\Submittals
+```
+
+To inspect one drive directly, run:
+
+```cmd
+net use Z:
+```
+
+This can show the remote UNC path for that specific mapping. If the drive does not appear, first run `net use` from a normal, non-elevated Command Prompt opened under the same Windows user who can see the drive in File Explorer. Mapped drives may be unavailable under a different user or in an elevated Administrator session.
+
+### Part 2 — Verify the UNC path
+
+1. Copy the **Remote** UNC path shown by `net use`.
+2. Paste it into the File Explorer address bar.
+3. Confirm the folder opens.
+4. If company policy permits, create and delete a temporary test folder.
+5. Do not continue until the account used by the gateway can access the location.
+
+Seeing a mapped drive in your own File Explorer session is not enough. The Windows account used by the gateway or File System connection must have both share and NTFS permission for the UNC location.
+
+### Part 3 — Find the Windows domain
+
+The older Command Prompt method is:
+
+```cmd
+wmic computersystem get domain
+```
+
+The value under **Domain** is usually the computer's Active Directory domain:
+
+```text
+Domain
+company.local
+```
+
+WMIC is deprecated and may not be installed on newer Windows systems. The preferred method is to open PowerShell and run:
+
+```powershell
+(Get-CimInstance Win32_ComputerSystem).Domain
+```
+
+These commands provide other useful identity values:
+
+```powershell
+$env:USERDOMAIN
+whoami
+whoami /upn
+```
+
+- `$env:USERDOMAIN` usually returns the short domain, such as `COMPANY`.
+- `whoami` may return a down-level username such as `COMPANY\jsmith`.
+- `whoami /upn` may return a user principal name such as `jsmith@company.com`.
+- `(Get-CimInstance Win32_ComputerSystem).Domain` may return the full DNS domain, such as `company.local`.
+
+These values may legitimately differ:
+
+```text
+Short domain:     COMPANY
+Full DNS domain:  company.local
+Username formats: COMPANY\jsmith
+                  jsmith@company.com
+```
+
+### Part 4 — Which domain value goes into the File System connection?
+
+The Power Automate File System connection normally needs credentials for a Windows account that can access the network share. Common username formats are `COMPANY\jsmith` and `jsmith@company.com`.
+
+Try the same account format normally used to access company resources. If authentication fails, ask IT which service or domain account the gateway and connection should use. The gateway service account may differ from the currently signed-in desktop user.
+
+- Never put the password in documentation.
+- Never commit credentials to GitHub.
+- Never include screenshots showing passwords, tokens, tenant IDs, or real internal server names.
+- Do not publish or commit the connection username or other credentials.
+
+### Part 5 — Cloud path versus desktop path
+
+The cloud flow and desktop flow may use different representations of the same location:
+
+Power Automate cloud/File System connector:
+
+```text
+\\fileserver.company.local\Projects\25000-25999\Project Name\Submittals
+```
+
+Power Automate Desktop:
+
+```text
+Z:\25000-25999\Project Name\Submittals
+```
+
+The cloud flow may use the UNC path, while the desktop flow may use the mapped-drive path. Both must point to the same location, and the destination folder must be created before the desktop flow tries to move the attachment. A generic conversion expression is:
+
+```text
+replace(
+  outputs('Full_Submittal_Folder_Path'),
+  '\\fileserver.company.local\Projects\',
+  'Z:\'
+)
+```
+
+Replace both example prefixes with the values you discovered for your own environment. Keep the real values in private configuration, not public documentation.
+
+### Part 6 — Troubleshooting
+
+#### `net use` does not show the mapped drive
+
+Possible causes include an elevated Command Prompt when the drive exists only in the normal user session, a disconnected drive, a different signed-in Windows account, an incomplete login script, or a location that is actually a shortcut or DFS path rather than a mapped drive.
+
+- Open File Explorer and click the drive once, then run `net use` again.
+- Run `net use Z:`.
+- Open a normal, non-elevated Command Prompt.
+- Ask IT for the share's UNC path if it still cannot be identified.
+
+#### `wmic` is not recognized
+
+Open PowerShell and use:
+
+```powershell
+(Get-CimInstance Win32_ComputerSystem).Domain
+$env:USERDOMAIN
+whoami
+whoami /upn
+```
+
+#### The UNC path opens for me but fails in Power Automate
+
+The gateway service or connection may use a different Windows account; that account may lack share or NTFS permissions; the gateway computer may be unable to resolve the server name; a firewall or VPN may be required; the Power Automate environment and gateway may be in different regions; the File System connection may use the wrong credentials; or its configured root folder may not match the paths used by the flow.
+
+#### The mapped drive works in File Explorer but not in Power Automate Desktop
+
+Power Automate Desktop may be running under another Windows user; PAD or the browser may be elevated; the mapped drive may be unavailable in that logon session; the user may need to reconnect the drive after sign-in; or the destination-path conversion may be incorrect.
+
+### Part 7 — Local setup worksheet
+
+| Setting | Example | Your value |
+|---|---|---|
+| Mapped drive letter | `Z:` | |
+| UNC root | `\\fileserver.company.local\Projects` | |
+| Short domain | `COMPANY` | |
+| Full domain | `company.local` | |
+| Connection username | `COMPANY\jsmith` | |
+| Cloud folder prefix | `\\fileserver.company.local\Projects\` | |
+| Desktop folder prefix | `Z:\` | |
+| Gateway name | `Company-Gateway-01` | |
+| Gateway machine | `WORKSTATION-01` | |
+
+This worksheet is for local setup notes only. Do not commit it if **Your value** contains real internal details.
+
 ## 1. Cloud path versus desktop path
 
 The cloud File System connector and Power Automate Desktop may refer to the same network location differently.
@@ -11,22 +195,22 @@ The cloud File System connector and Power Automate Desktop may refer to the same
 Cloud/gateway UNC path:
 
 ```text
-\\fileserver\Projects\Project Name\Submittals
+\\fileserver.company.local\Projects\25000-25999\Project Name\Submittals
 ```
 
 Windows mapped-drive path:
 
 ```text
-A:\Project Name\Submittals
+Z:\25000-25999\Project Name\Submittals
 ```
 
-Both paths represent the same folder only when the Windows user's `A:` mapping points to the corresponding server/share root. A cloud-flow expression can convert the prefix before passing the path to the desktop flow:
+Both paths represent the same folder only when the Windows user's `Z:` mapping points to the corresponding server/share root. A cloud-flow expression can convert the prefix before passing the path to the desktop flow:
 
 ```text
 replace(
   outputs('Full_Submittal_Folder_Path'),
-  '\\fileserver\Projects\A-Drive\',
-  'A:\'
+  '\\fileserver.company.local\Projects\',
+  'Z:\'
 )
 ```
 
