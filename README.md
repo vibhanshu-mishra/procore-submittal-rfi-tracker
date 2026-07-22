@@ -1,5 +1,7 @@
 # Procore Submittal and RFI Tracker
 
+![Workflow overview](images/workflow-overview.png)
+
 > Automate intake of Procore RFI and Submittal email notifications into project folders and a searchable Excel tracker. The project offers a cloud-only Community Edition and a Beta Complete Edition that adds Power Automate Desktop for attachments requiring an authenticated Procore browser session.
 
 This is an independent open-source project. It is not affiliated with or endorsed by Procore or Microsoft.
@@ -59,10 +61,6 @@ The Community Edition uses Power Automate cloud flows and standard Microsoft 365
 The Complete Edition includes the Community behavior and adds an attended Power Automate Desktop flow. The cloud flow extracts attachment URLs and calls the desktop flow once per attachment. The desktop flow opens each URL in Chrome, waits for a new completed download, validates the destination, and moves the file. Processing must remain sequential to prevent one run from claiming another run's file.
 
 [Complete Edition guide](complete-edition/README.md) · [Installation](docs/complete-installation.md)
-
-## Workflow architecture
-
-![Workflow overview](images/workflow-overview.png)
 
 ### Community Edition
 
