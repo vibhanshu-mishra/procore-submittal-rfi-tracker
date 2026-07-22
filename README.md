@@ -1,6 +1,6 @@
 # Procore Submittal and RFI Tracker
 
-Automate intake of Procore RFI and Submittal email notifications into project folders and a searchable Excel tracker. The project offers a cloud-only Community Edition and a Beta Complete Edition that adds Power Automate Desktop for attachments requiring an authenticated Procore browser session.
+> Automate intake of Procore RFI and Submittal email notifications into project folders and a searchable Excel tracker. The project offers a cloud-only Community Edition and a Beta Complete Edition that adds Power Automate Desktop for attachments requiring an authenticated Procore browser session.
 
 This is an independent open-source project. It is not affiliated with or endorsed by Procore or Microsoft.
 
