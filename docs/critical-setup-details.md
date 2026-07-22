@@ -11,22 +11,22 @@ The cloud File System connector and Power Automate Desktop may refer to the same
 Cloud/gateway UNC path:
 
 ```text
-\\fileserver\Projects\25000-25999\Project Name\Submittals
+\\fileserver\Projects\Project Name\Submittals
 ```
 
 Windows mapped-drive path:
 
 ```text
-Z:\25000-25999\Project Name\Submittals
+A:\Project Name\Submittals
 ```
 
-Both paths represent the same folder only when the Windows user's `Z:` mapping points to the corresponding server/share root. A cloud-flow expression can convert the prefix before passing the path to the desktop flow:
+Both paths represent the same folder only when the Windows user's `A:` mapping points to the corresponding server/share root. A cloud-flow expression can convert the prefix before passing the path to the desktop flow:
 
 ```text
 replace(
   outputs('Full_Submittal_Folder_Path'),
-  '\\fileserver\Projects\Z-Drive\',
-  'Z:\'
+  '\\fileserver\Projects\A-Drive\',
+  'A:\'
 )
 ```
 
