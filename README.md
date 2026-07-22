@@ -180,19 +180,6 @@ Do not place passwords, tokens, signed Procore links, tenant/client IDs, real pr
 - **Complete Edition:** Beta architecture and documentation. Test it carefully before relying on it for project records.
 - **Not included today:** a Procore API integration or discovery of attachments that were never present in the triggering email.
 
-## Repository structure
-
-```text
-community-edition/   Community cloud-flow package and guide
-complete-edition/    Complete Edition Beta guide
-docs/                Installation, architecture, security, testing, and support
-templates/           Shared Excel tracker template
-images/              Documentation images
-README.backup.md     Archived background from the earlier single-edition README
-CHANGELOG.md          Documentation and edition history
-LICENSE               MIT License
-```
-
 ## Documentation and troubleshooting
 
 - [Critical Setup Details](docs/critical-setup-details.md)
