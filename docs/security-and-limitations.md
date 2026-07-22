@@ -5,7 +5,7 @@
 ## Security practices
 
 - Never commit passwords, personal tokens, tenant/client IDs, connection credentials, browser profiles, real email addresses, signed Procore URLs, internal server names, or real project/company IDs.
-- Use placeholders such as `https://us02.procore.com/.../document_downloader?attachment_id=EXAMPLE` and `\\fileserver\Projects\25000-25999\Project Name\RFIs` in public material.
+- Use placeholders such as `https://us02.procore.com/.../document_downloader?attachment_id=EXAMPLE` and `\\fileserver\Projects\Project Name\RFIs` in public material.
 - Restrict Power Automate environment, connection, run-history, gateway, machine, and folder access using least privilege.
 - Review run-history retention because action inputs/outputs may contain project metadata or time-limited attachment URLs.
 - Use a dedicated, governed automation identity where organizational policy permits; do not share personal credentials.
