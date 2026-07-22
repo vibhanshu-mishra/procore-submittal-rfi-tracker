@@ -4,10 +4,13 @@
 
 The cloud flow is the coordinator for both editions. Exact action names may vary in exported packages, but the processing responsibilities should remain recognizable.
 
+For variable scope, loop binding, and concurrency details, read [Critical Setup Details](critical-setup-details.md).
+
 ## End-to-end flow
 
 ```text
 Outlook email trigger
+  -> initialize AttachmentURLs once as an Array
   -> source/type guard
   -> HTML/body cleanup
   -> RFI or Submittal classification
@@ -44,7 +47,16 @@ A match skips row creation according to the configured duplicate policy. Overlap
 
 ## Attachment URL extraction and arrays
 
-The flow identifies every relevant hyperlink in the email body, filters cover sheet versus attachment links, normalizes/decodes URLs only as needed, and stores attachment URLs in an array. Test zero, one, and many URLs. Do not concatenate multiple URLs into one desktop input.
+Initialize `AttachmentURLs` once, directly under the trigger—not inside a Condition, Switch, Scope branch, or loop. The flow identifies every relevant hyperlink in the email body, filters cover sheet versus attachment links, normalizes/decodes URLs only as needed, and appends attachment URLs to that array. RFI and Submittal branches can share it because only one branch runs for an email. Test zero, one, and many URLs. Do not concatenate multiple URLs into one desktop input.
+
+Use two distinct loops:
+
+```text
+extract segments -> loop segments -> append valid URLs
+finish extraction -> loop AttachmentURLs -> run PAD once per URL
+```
+
+Do not nest the PAD loop inside the extraction loop's True branch.
 
 ## Community versus Complete branches
 
@@ -55,6 +67,8 @@ The Complete branch passes each protected attachment URL to Power Automate Deskt
 ## Apply to each and sequential execution
 
 The Complete attachment array feeds `Apply to each`. Concurrency must be off or one. Every iteration waits for the desktop result before starting the next because runs share a Downloads folder and use timestamp-based file detection. Also consider serializing overlapping trigger runs.
+
+Map `AttachmentURL` from **Current item** of this immediate final loop. A copied token can still reference an old loop and produce `InvalidTemplate`; delete and reselect it after copying or moving actions. Ten URLs must cause ten sequential desktop runs.
 
 ## Cover sheet handling
 

@@ -4,6 +4,21 @@
 
 Start with the failed Power Automate run and identify the first failed or skipped action. Record the email type, extracted item identity, and stage, but redact URLs and internal paths before sharing logs publicly.
 
+For the required variable placement, two-loop design, immediate-loop binding, and Power Fx syntax, compare the flow with [Critical Setup Details](critical-setup-details.md).
+
+## `InvalidTemplate` mentions an `Apply_to_each`
+
+- Confirm `AttachmentURLs` is initialized once directly under the trigger.
+- Confirm the PAD loop begins only after the URL-extraction loop has finished.
+- Delete and reselect `AttachmentURL` from **Current item** of the immediate loop containing the PAD action.
+- Copied dynamic-content tokens may retain a reference to an older loop even when their displayed label is identical.
+
+## Desktop variable appears as literal text
+
+- Confirm the desktop flow is using Power Fx consistently.
+- Use expressions such as `=AttachmentURL`, not legacy `%AttachmentURL%` syntax.
+- Confirm both desktop inputs are Text inputs and that cloud-supplied values override test defaults.
+
 ## No email-triggered run
 
 - Confirm the flow is on and in the expected environment.
@@ -80,6 +95,7 @@ Start with the failed Power Automate run and identify the first failed or skippe
 - Disable `Apply to each` concurrency or set it to one.
 - Review trigger-level concurrency so two emails do not overlap in one Downloads folder.
 - Confirm the desktop flow handles one URL per run and records a fresh start timestamp.
+- Confirm the PAD loop is not nested inside the URL-extraction True branch.
 
 ## Escalation information
 

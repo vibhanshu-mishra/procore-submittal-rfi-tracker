@@ -2,6 +2,8 @@
 
 [Back to main README](../README.md)
 
+Implementation-sensitive answers are consolidated in [Critical Setup Details](critical-setup-details.md).
+
 ## Why can the cloud flow download cover sheets but not some attachments?
 
 Different links can have different access behavior. A cover sheet may be available to the cloud connector while another URL redirects to an interactive Procore sign-in or requires browser session cookies. Success for one link does not imply access to every link in the email.
@@ -22,6 +24,8 @@ The documented Complete Edition is attended: it requires an active, signed-in Wi
 
 The cloud flow creates an array of ten URLs and calls the desktop flow ten times. Each run receives one `AttachmentURL` and one `DestinationFolder`, waits for completion, and then the next iteration begins.
 
+The final attachment loop must remain sequential. Separate email-triggered runs can still overlap and need their own concurrency review.
+
 ## Why must attachment processing be sequential?
 
 The desktop flow watches a shared Downloads folder and identifies a new file using the run start time and completion state. Overlapping runs could select or move the wrong file. Sequential execution keeps one attachment in flight and makes errors traceable.
@@ -29,6 +33,14 @@ The desktop flow watches a shared Downloads folder and identifies a new file usi
 ## Can I use UNC paths instead of a mapped drive?
 
 Yes, if the account and runtime can resolve the UNC path and have permission. Mapped drives are session-specific, so UNC is often more predictable, but test the exact path under the gateway and attended desktop identities. See [folder mapping](folder-mapping.md).
+
+## Why does `Current item` cause an `InvalidTemplate` error?
+
+The token may belong to an older or outer loop, especially after actions were copied. Delete it and select **Current item** from the immediate final `Apply to each AttachmentURLs` loop containing the desktop action.
+
+## Should an existing destination file be overwritten?
+
+The recommended default is to leave it unchanged and log a collision/manual-review item. Overwrite only when an explicit, approved policy is configured; never silently replace a project record.
 
 ## What happens if Procore changes its email template?
 

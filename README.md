@@ -29,6 +29,19 @@ Other Microsoft 365, Power Automate, connector, gateway, and organizational lice
 
 See the [detailed comparison](docs/comparison.md).
 
+## Critical Setup Details
+
+Before importing or editing either edition, review the [Critical Setup Details](docs/critical-setup-details.md). Small configuration mistakes can make a flow import successfully but fail at runtime. In particular:
+
+- Initialize `AttachmentURLs` once, directly below the email trigger.
+- Keep URL extraction and Power Automate Desktop execution in two separate loops.
+- Bind `AttachmentURL` to **Current item** from the immediate final attachment loop.
+- Keep the final attachment loop sequential and consider overlap between separate email-triggered runs.
+- Pass the correct Windows-visible `DestinationFolder`, and create that folder before the desktop flow starts.
+- Use Power Fx syntax consistently in the provided desktop-flow design.
+
+The critical guide includes safe placeholder paths, required input definitions, file-detection behavior, authentication constraints, filename handling, and the required test cases.
+
 ## Which edition should I use?
 
 Use the **Community Edition** if cover sheets and directly accessible links cover most of your needs, you can manually retrieve protected attachments, or you do not have attended RPA rights.
@@ -182,6 +195,7 @@ LICENSE               MIT License
 
 ## Documentation and troubleshooting
 
+- [Critical Setup Details](docs/critical-setup-details.md)
 - [Edition comparison](docs/comparison.md)
 - [Community installation](docs/community-installation.md)
 - [Complete installation](docs/complete-installation.md)

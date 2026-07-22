@@ -4,6 +4,8 @@
 
 Folder paths must be valid from the runtime that uses them. The cloud File System connector normally accesses network storage through a gateway; Power Automate Desktop accesses storage as the signed-in Windows user.
 
+Review the path-conversion expression and execution-order requirements in [Critical Setup Details](critical-setup-details.md) before configuring the Complete Edition.
+
 ## Path examples
 
 UNC path used by a gateway or Windows user:
@@ -23,6 +25,18 @@ Use placeholders in public documentation and screenshots. Do not publish a real 
 ## Cloud path versus desktop path
 
 A gateway connection may recognize the UNC path but not the user's mapped drive. Conversely, a desktop action may receive a mapped path convenient for the active Windows session. Store separate path columns if needed and send only the Windows-resolvable value as `DestinationFolder`.
+
+A generic conversion expression is:
+
+```text
+replace(
+  outputs('Full_Submittal_Folder_Path'),
+  '\\fileserver\Projects\Z-Drive\',
+  'Z:\'
+)
+```
+
+The real UNC prefix varies by company. Substitute the private server/share prefix in the actual flow, never in public documentation. This replacement is valid only if that prefix maps to `Z:` for the desktop user.
 
 ## Converting UNC to mapped drive
 
@@ -63,6 +77,8 @@ The relevant account needs only the access required for its actions, typically l
 ## Why the desktop destination must already exist
 
 The cloud flow resolves and creates the exact RFI/Submittal item folder before invoking the desktop flow. The desktop flow then validates `DestinationFolder` and moves one completed file. If it created a missing folder automatically, a parsing or mapping error could silently create a plausible but incorrect location. Failing on a missing destination preserves the error for review and reduces misfiled project documents.
+
+When the destination filename already exists, the conservative default is to leave the existing file unchanged and log the collision. Overwrite only when explicitly configured and approved.
 
 ## Common issues
 

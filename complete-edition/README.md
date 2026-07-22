@@ -4,6 +4,8 @@ The Complete Edition extends the Community Edition with attended Power Automate 
 
 **Status: Beta.** Validate it with representative files, failure cases, and organizational security controls before relying on it for project records. This independent project is not affiliated with or endorsed by Procore or Microsoft.
 
+Before configuring the Beta, read [Critical Setup Details](../docs/critical-setup-details.md). It defines the required array scope, two-loop structure, immediate-loop `Current item` binding, Power Fx syntax, path conversion, concurrency, and collision behavior.
+
 ## Who it is for
 
 - Teams that frequently receive Procore attachments inaccessible to cloud connectors
@@ -47,9 +49,13 @@ See [desktop-flow architecture](../docs/desktop-flow-architecture.md).
 
 Do not pass a cloud-only path to the desktop flow unless Windows can resolve it.
 
+Cloud-supplied values override any input defaults used during manual desktop-flow tests. The `AttachmentURL` value must be **Current item** from the immediate final attachment loop, not a copied token from an earlier extraction loop.
+
 ## Multiple attachments and sequential processing
 
 An email with ten URLs produces ten desktop-flow calls. Each call handles exactly one attachment. The cloud loop must remain sequential: the desktop algorithm watches a shared Downloads folder, so overlapping runs could select or move the wrong file. Sequential execution also makes a failure attributable to a specific URL.
+
+Separate email-triggered flow runs may still overlap. Review trigger concurrency or provide tested isolation before production scheduling.
 
 ## Download-detection logic
 

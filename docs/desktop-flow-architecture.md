@@ -4,12 +4,16 @@
 
 The desktop flow is an attended, one-attachment worker. Multiple attachments are handled by repeated sequential calls from the cloud flow.
 
+Read [Critical Setup Details](critical-setup-details.md) for the exact cloud-loop structure, Power Fx expressions, and path conversion.
+
 ## Contract
 
 Inputs:
 
-- `AttachmentURL` — one attachment URL from the email
-- `DestinationFolder` — one existing Windows-visible RFI or Submittal folder
+- `AttachmentURL` — **Text input**; one attachment URL from the immediate cloud attachment loop
+- `DestinationFolder` — **Text input**; one existing Windows-visible RFI or Submittal folder
+
+Cloud values override any defaults used for manual desktop-flow testing.
 
 The flow returns success only after one completed file is moved to the destination. It stops with an error if the download, destination validation, or move cannot be confirmed.
 
@@ -35,6 +39,20 @@ validate inputs
 
 Record the current time immediately before launching the URL. File candidates must have `LastModified` at or after this timestamp. Use one consistent local/UTC basis and allow only a tested tolerance for filesystem timestamp precision; a broad tolerance can admit an earlier unrelated download.
 
+## Power Fx expressions
+
+The documented flow uses Power Fx, including expressions such as:
+
+```powerfx
+=AttachmentURL
+=DestinationFolder
+=Index(Files, 1).FullName
+=CountRows(Files) > 0
+=DownloadedFileFound = false And RetryCount < 30
+```
+
+Do not mix these with legacy `%Variable%` syntax.
+
 ## Launch Chrome
 
 Open the URL using the Chrome profile belonging to the attended Windows user. That profile must already have access to Procore. The automation should not contain the user's password. If navigation produces sign-in, access-denied, expired-link, or confirmation UI, the run should time out or fail clearly rather than selecting an unrelated file.
@@ -43,11 +61,12 @@ Open the URL using the Chrome profile belonging to the attended Windows user. Th
 
 At each bounded retry:
 
-1. List files in the configured Downloads folder.
+1. List files in the configured Downloads folder and sort them by `LastModified` descending.
 2. Exclude directories and any file older than the run start.
 3. Exclude names ending in `.crdownload`, `.tmp`, or `.partial` (case-insensitively).
 4. Choose the intended completed candidate using the most specific evidence available; if only recency is available, prevent other downloads during the run.
-5. Wait briefly and repeat if no candidate qualifies.
+5. After a successful move, set `DownloadedFileFound` to `true` and exit the loop.
+6. Wait briefly and repeat if no candidate qualifies; stop with an error after the bounded timeout.
 
 Set retry interval and count to cover tested large files while retaining a finite error outcome.
 
@@ -58,6 +77,8 @@ Check that `DestinationFolder` exists before moving the file. Do not silently cr
 ## Move action
 
 Move the completed file to the exact folder and verify the result. Define behavior when the filename exists: fail, overwrite by explicit policy, or generate a collision-safe name. A silent overwrite is risky for project records.
+
+The recommended conservative default is to leave an existing destination file unchanged and log/raise the collision. Overwrite only when explicitly configured and approved.
 
 ## Error stops
 

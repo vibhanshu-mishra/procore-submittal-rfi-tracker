@@ -4,6 +4,8 @@
 
 Run tests in a non-critical project/storage area with redacted or synthetic documents. For each case, record edition, run ID, expected tracker result, expected destination files, and first failing stage. A green run alone is not acceptance.
 
+Complete the configuration audit in [Critical Setup Details](critical-setup-details.md) before running this matrix.
+
 ## Core cases
 
 | Test | Expected result |
@@ -33,6 +35,8 @@ Run tests in a non-critical project/storage area with redacted or synthetic docu
 - [ ] Verify cover sheet behavior independently of attachments.
 - [ ] Count extracted attachment URLs.
 - [ ] For Complete Edition, inspect each input pair and prove sequential execution.
+- [ ] Confirm `AttachmentURL` is bound to Current item from the immediate PAD loop.
+- [ ] Confirm cloud values override any desktop input testing defaults.
 - [ ] Confirm no `.crdownload`, `.tmp`, or `.partial` file was moved.
 - [ ] Compare destination file count, names, sizes, and readability with expectations.
 - [ ] Confirm the tracker row and any manual-review/error state.

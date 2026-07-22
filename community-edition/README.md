@@ -65,6 +65,8 @@ See [cloud-flow architecture](../docs/cloud-flow-architecture.md).
 
 Follow the [Community installation guide](../docs/community-installation.md), [Excel setup](../docs/excel-setup.md), and [folder mapping guide](../docs/folder-mapping.md).
 
+If reviewing or extending attachment extraction, also follow [Critical Setup Details](../docs/critical-setup-details.md): initialize `AttachmentURLs` once directly under the trigger and keep its scope outside all RFI/Submittal branches and loops.
+
 ## Configuration summary
 
 - Confirm the Outlook trigger folder and any sender/subject conditions.
