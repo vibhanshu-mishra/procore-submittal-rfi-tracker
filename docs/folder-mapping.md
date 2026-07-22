@@ -11,13 +11,13 @@ Review the path-conversion expression and execution-order requirements in [Criti
 UNC path used by a gateway or Windows user:
 
 ```text
-\\fileserver\Projects\25000-25999\Project Name\RFIs
+\\fileserver\Projects\Project Name\RFIs
 ```
 
 Mapped-drive path used by the attended desktop session:
 
 ```text
-Z:\25000-25999\Project Name\Submittals
+A:\Project Name\Submittals
 ```
 
 Use placeholders in public documentation and screenshots. Do not publish a real server or project path.
@@ -31,34 +31,34 @@ A generic conversion expression is:
 ```text
 replace(
   outputs('Full_Submittal_Folder_Path'),
-  '\\fileserver\Projects\Z-Drive\',
-  'Z:\'
+  '\\fileserver\Projects\A-Drive\',
+  'A:\'
 )
 ```
 
-The real UNC prefix varies by company. Substitute the private server/share prefix in the actual flow, never in public documentation. This replacement is valid only if that prefix maps to `Z:` for the desktop user.
+The real UNC prefix varies by company. Substitute the private server/share prefix in the actual flow, never in public documentation. This replacement is valid only if that prefix maps to `A:` for the desktop user.
 
 ## Converting UNC to mapped drive
 
 Suppose Windows maps this network root:
 
 ```text
-\\fileserver\share\Z-Drive
+\\fileserver\share\A-Drive
 ```
 
-to drive `Z:`. Convert:
+to drive `A:`. Convert:
 
 ```text
-\\fileserver\share\Z-Drive\25000-25999\Project Name\RFIs
+\\fileserver\share\A-Drive\Project Name\RFIs
 ```
 
 to:
 
 ```text
-Z:\25000-25999\Project Name\RFIs
+A:\Project Name\RFIs
 ```
 
-Do not merely replace the server prefix unless that exact share is mapped to `Z:` for the automation user.
+Do not merely replace the server prefix unless that exact share is mapped to `A:` for the automation user.
 
 ## Test in File Explorer
 
