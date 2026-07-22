@@ -45,7 +45,7 @@ See [desktop-flow architecture](../docs/desktop-flow-architecture.md).
 | Input | Type | Purpose | Example |
 |---|---|---|---|
 | `AttachmentURL` | Text | One Procore attachment link for the current run | `https://us02.procore.com/.../document_downloader?attachment_id=EXAMPLE` |
-| `DestinationFolder` | Text | Existing Windows-visible target folder | `Z:\25000-25999\Project Name\RFIs\RFI-001` |
+| `DestinationFolder` | Text | Existing Windows-visible target folder | `A:\Project Name\RFIs\RFI-001` |
 
 Do not pass a cloud-only path to the desktop flow unless Windows can resolve it.
 
