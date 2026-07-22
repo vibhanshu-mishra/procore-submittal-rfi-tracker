@@ -211,6 +211,7 @@ Roadmap items are proposals, not delivery commitments.
 Built by **Vibhanshu Mishra, PE**, Structural Engineer at AG&E Structural Engenuity, Austin, Texas.
 
 - [LinkedIn](https://www.linkedin.com/in/vibhanshu9/)
+- [Procore SDK - PyProcore](https://github.com/vibhanshu-mishra/pyprocore)
 - [RISA-3D MCP Server](https://github.com/vibhanshu-mishra/risa3d-mcp-server)
 - [Tekla Structural Designer MCP Server](https://github.com/vibhanshu-mishra/tsd-mcp)
 
