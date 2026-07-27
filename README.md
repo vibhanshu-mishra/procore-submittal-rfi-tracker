@@ -200,10 +200,10 @@ Do not place passwords, tokens, signed Procore links, tenant/client IDs, real pr
 ## Roadmap
 
 - Publish and version the Complete Edition exports after broader Beta validation
-- Improve failure notifications and operational logging
+- Improve failure notifications aND add operational audit log
 - Add regression fixtures for Procore email-template changes
 - Evaluate Procore API integration where the project owner authorizes access
-- Explore optional Teams notifications, reporting, and SharePoint-centered workflows
+- Explore optional Teams notifications, reporting, Teams Planner integration and SharePoint-centered workflows
 
 Roadmap items are proposals, not delivery commitments.
 
