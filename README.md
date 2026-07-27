@@ -6,8 +6,6 @@
 
 > Automate intake of Procore RFI and Submittal email notifications into project folders and a searchable Excel tracker. The project offers a cloud-only Community Edition and a Beta Complete Edition that adds Power Automate Desktop for attachments requiring an authenticated Procore browser session.
 
-This is an independent open-source project. It is not affiliated with or endorsed by Procore or Microsoft.
-
 </div>
 
 ## Why this project exists
@@ -221,3 +219,7 @@ Built by **Vibhanshu Mishra, PE**, Structural Engineer at AG&E Structural Engenu
 ## License
 
 Released under the [MIT License](LICENSE).
+
+## Disclaimer
+
+> This is an independent open-source project. It is not affiliated with or endorsed by Procore or Microsoft.
