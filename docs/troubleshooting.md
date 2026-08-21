@@ -57,7 +57,7 @@ For the required variable placement, two-loop design, immediate-loop binding, an
 ## `net use` does not show the mapped drive
 
 - Open File Explorer and click the drive once, then run `net use` again.
-- Run `net use Z:` to inspect that drive directly.
+- Run `net use A:` to inspect that drive directly.
 - Use a normal, non-elevated Command Prompt under the Windows user who sees the drive.
 - Check whether the drive is disconnected, belongs to another user session, or depends on a login script.
 - The location may be a shortcut or DFS path rather than a mapped drive; ask IT for its UNC path if needed.
