@@ -19,7 +19,7 @@ net use
 The output includes these columns:
 
 - **Status** shows whether the connection is available.
-- **Local** is the mapped drive letter, such as `Z:`.
+- **Local** is the mapped drive letter, such as `A:`.
 - **Remote** is the UNC path, such as `\\fileserver.company.local\Projects`.
 - **Network** identifies the network provider or connection type.
 
@@ -27,25 +27,25 @@ Find the row whose **Local** value matches the drive used for the project folder
 
 ```text
 Status       Local     Remote
-OK           Z:        \\fileserver.company.local\Projects
+OK           A:        \\fileserver.company.local\Projects
 ```
 
 The UNC root for `Z:` in this example is `\\fileserver.company.local\Projects`. Therefore:
 
 ```text
-Z:\25000-25999\Project Name\Submittals
+A:\Project Name\Submittals
 ```
 
 is the same location as:
 
 ```text
-\\fileserver.company.local\Projects\25000-25999\Project Name\Submittals
+\\fileserver.company.local\Projects\Project Name\Submittals
 ```
 
 To inspect one drive directly, run:
 
 ```cmd
-net use Z:
+net use A:
 ```
 
 This can show the remote UNC path for that specific mapping. If the drive does not appear, first run `net use` from a normal, non-elevated Command Prompt opened under the same Windows user who can see the drive in File Explorer. Mapped drives may be unavailable under a different user or in an elevated Administrator session.
@@ -121,13 +121,13 @@ The cloud flow and desktop flow may use different representations of the same lo
 Power Automate cloud/File System connector:
 
 ```text
-\\fileserver.company.local\Projects\25000-25999\Project Name\Submittals
+\\fileserver.company.local\Projects\Project Name\Submittals
 ```
 
 Power Automate Desktop:
 
 ```text
-Z:\25000-25999\Project Name\Submittals
+A:\Project Name\Submittals
 ```
 
 The cloud flow may use the UNC path, while the desktop flow may use the mapped-drive path. Both must point to the same location, and the destination folder must be created before the desktop flow tries to move the attachment. A generic conversion expression is:
@@ -136,7 +136,7 @@ The cloud flow may use the UNC path, while the desktop flow may use the mapped-d
 replace(
   outputs('Full_Submittal_Folder_Path'),
   '\\fileserver.company.local\Projects\',
-  'Z:\'
+  'A:\'
 )
 ```
 
@@ -149,7 +149,7 @@ Replace both example prefixes with the values you discovered for your own enviro
 Possible causes include an elevated Command Prompt when the drive exists only in the normal user session, a disconnected drive, a different signed-in Windows account, an incomplete login script, or a location that is actually a shortcut or DFS path rather than a mapped drive.
 
 - Open File Explorer and click the drive once, then run `net use` again.
-- Run `net use Z:`.
+- Run `net use A:`.
 - Open a normal, non-elevated Command Prompt.
 - Ask IT for the share's UNC path if it still cannot be identified.
 
@@ -176,13 +176,13 @@ Power Automate Desktop may be running under another Windows user; PAD or the bro
 
 | Setting | Example | Your value |
 |---|---|---|
-| Mapped drive letter | `Z:` | |
+| Mapped drive letter | `A:` | |
 | UNC root | `\\fileserver.company.local\Projects` | |
 | Short domain | `COMPANY` | |
 | Full domain | `company.local` | |
 | Connection username | `COMPANY\jsmith` | |
 | Cloud folder prefix | `\\fileserver.company.local\Projects\` | |
-| Desktop folder prefix | `Z:\` | |
+| Desktop folder prefix | `A:\` | |
 | Gateway name | `Company-Gateway-01` | |
 | Gateway machine | `WORKSTATION-01` | |
 
@@ -195,22 +195,22 @@ The cloud File System connector and Power Automate Desktop may refer to the same
 Cloud/gateway UNC path:
 
 ```text
-\\fileserver.company.local\Projects\25000-25999\Project Name\Submittals
+\\fileserver.company.local\Projects\Project Name\Submittals
 ```
 
 Windows mapped-drive path:
 
 ```text
-Z:\25000-25999\Project Name\Submittals
+A:\Project Name\Submittals
 ```
 
-Both paths represent the same folder only when the Windows user's `Z:` mapping points to the corresponding server/share root. A cloud-flow expression can convert the prefix before passing the path to the desktop flow:
+Both paths represent the same folder only when the Windows user's `A:` mapping points to the corresponding server/share root. A cloud-flow expression can convert the prefix before passing the path to the desktop flow:
 
 ```text
 replace(
   outputs('Full_Submittal_Folder_Path'),
   '\\fileserver.company.local\Projects\',
-  'Z:\'
+  'A:\'
 )
 ```
 
