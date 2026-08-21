@@ -120,7 +120,7 @@ See [Excel setup](docs/excel-setup.md).
 
 ## Folder mapping
 
-Cloud actions may use a gateway-visible UNC path such as `\\fileserver.company.local\Projects\25000-25999\Project Name\RFIs`, while the attended desktop flow may receive `Z:\25000-25999\Project Name\RFIs`. These are different representations of the same location and must be tested under the accounts that run each flow. The desktop destination must already exist before a move.
+Cloud actions may use a gateway-visible UNC path such as `\\fileserver.company.local\Projects\Project Name\RFIs`, while the attended desktop flow may receive `A:\Project Name\RFIs`. These are different representations of the same location and must be tested under the accounts that run each flow. The desktop destination must already exist before a move.
 
 See [folder mapping](docs/folder-mapping.md).
 
@@ -200,7 +200,7 @@ Do not place passwords, tokens, signed Procore links, tenant/client IDs, real pr
 ## Roadmap
 
 - Publish and version the Complete Edition exports after broader Beta validation
-- Improve failure notifications aND add operational audit log
+- Improve failure notifications and add operational audit log
 - Add regression fixtures for Procore email-template changes
 - Evaluate Procore API integration where the project owner authorizes access
 - Explore optional Teams notifications, reporting, Teams Planner integration and SharePoint-centered workflows
@@ -215,10 +215,6 @@ Built by **Vibhanshu Mishra, PE**, Structural Engineer at AG&E Structural Engenu
 - [Procore SDK - PyProcore](https://github.com/vibhanshu-mishra/pyprocore)
 - [RISA-3D MCP Server](https://github.com/vibhanshu-mishra/risa3d-mcp-server)
 - [Tekla Structural Designer MCP Server](https://github.com/vibhanshu-mishra/tsd-mcp)
-
-## License
-
-Released under the [MIT License](LICENSE).
 
 ## Disclaimer
 
