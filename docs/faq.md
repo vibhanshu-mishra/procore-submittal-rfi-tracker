@@ -34,9 +34,9 @@ The desktop flow watches a shared Downloads folder and identifies a new file usi
 
 Yes, if the account and runtime can resolve the UNC path and have permission. Mapped drives are session-specific, so UNC is often more predictable, but test the exact path under the gateway and attended desktop identities. See [folder mapping](folder-mapping.md).
 
-## How do I find the UNC path behind my `Z:` drive?
+## How do I find the UNC path behind my `A:` drive?
 
-Open a normal, non-elevated Command Prompt as the user who sees the drive and run `net use` or `net use Z:`. Record the **Remote** value for `Z:` and verify it in File Explorer. See the [step-by-step discovery guide](critical-setup-details.md#how-to-find-your-unc-path-and-windows-domain).
+Open a normal, non-elevated Command Prompt as the user who sees the drive and run `net use` or `net use A:`. Record the **Remote** value for `A:` and verify it in File Explorer. See the [step-by-step discovery guide](critical-setup-details.md#how-to-find-your-unc-path-and-windows-domain).
 
 ## How do I find my Windows domain?
 
@@ -44,7 +44,7 @@ Open PowerShell and run `(Get-CimInstance Win32_ComputerSystem).Domain`. Use `$e
 
 ## Why does `net use` show no mapped drives?
 
-The drive may belong only to your normal user session, be disconnected, depend on an incomplete login script, or be a shortcut/DFS path rather than a true mapping. Avoid an elevated Command Prompt, open the drive once in File Explorer, retry `net use Z:`, and ask IT for the UNC path if it remains hidden.
+The drive may belong only to your normal user session, be disconnected, depend on an incomplete login script, or be a shortcut/DFS path rather than a true mapping. Avoid an elevated Command Prompt, open the drive once in File Explorer, retry `net use A:`, and ask IT for the UNC path if it remains hidden.
 
 ## Why does the UNC path work for me but fail through the gateway?
 
