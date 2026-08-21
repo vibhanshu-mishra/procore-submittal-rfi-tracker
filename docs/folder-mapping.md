@@ -13,13 +13,13 @@ If you know only a mapped drive letter, follow [How to Find Your UNC Path and Wi
 UNC path used by a gateway or Windows user:
 
 ```text
-\\fileserver.company.local\Projects\25000-25999\Project Name\RFIs
+\\fileserver.company.local\Projects\Project Name\RFIs
 ```
 
 Mapped-drive path used by the attended desktop session:
 
 ```text
-Z:\25000-25999\Project Name\Submittals
+A:\Project Name\Submittals
 ```
 
 Use placeholders in public documentation and screenshots. Do not publish a real server or project path.
@@ -34,11 +34,11 @@ A generic conversion expression is:
 replace(
   outputs('Full_Submittal_Folder_Path'),
   '\\fileserver.company.local\Projects\',
-  'Z:\'
+  'A:\'
 )
 ```
 
-The real UNC prefix varies by company. Substitute the private server/share prefix in the actual flow, never in public documentation. This replacement is valid only if that prefix maps to `Z:` for the desktop user.
+The real UNC prefix varies by company. Substitute the private server/share prefix in the actual flow, never in public documentation. This replacement is valid only if that prefix maps to `A:` for the desktop user.
 
 ## Converting UNC to mapped drive
 
@@ -48,19 +48,19 @@ Suppose Windows maps this network root:
 \\fileserver.company.local\Projects
 ```
 
-to drive `Z:`. Convert:
+to drive `A:`. Convert:
 
 ```text
-\\fileserver.company.local\Projects\25000-25999\Project Name\RFIs
+\\fileserver.company.local\Projects\Project Name\RFIs
 ```
 
 to:
 
 ```text
-Z:\25000-25999\Project Name\RFIs
+A:\Project Name\RFIs
 ```
 
-Do not merely replace the server prefix unless that exact share is mapped to `Z:` for the automation user.
+Do not merely replace the server prefix unless that exact share is mapped to `A:` for the automation user.
 
 ## Test in File Explorer
 
