@@ -6,7 +6,7 @@ These details are easy to miss because a flow can save or import successfully wh
 
 ## How to Find Your UNC Path and Windows Domain
 
-Users often know a project location only by a mapped drive letter such as `Z:\`, but the Power Automate File System connection may require its underlying UNC path, such as `\\fileserver.company.local\Projects`. Use the steps below on the Windows computer that can access the project folders.
+Users often know a project location only by a mapped drive letter such as `A:\`, but the Power Automate File System connection may require its underlying UNC path, such as `\\fileserver.company.local\Projects`. Use the steps below on the Windows computer that can access the project folders.
 
 ### Part 1 — Find the UNC path behind a mapped drive
 
